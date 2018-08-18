@@ -19,5 +19,17 @@
     <string name="error_get_inbox_intent">There was a problem getting the inbox intent!</string>
     <string name="error_get_select_opponents">There was a problem getting the select opponents intent!</string>
     <string name="turn_label">Turn %1$d</string>
+    <string name="turn_finished">Your turn is finished, you can not make any more moves.</string>
+    <string name="all_moves_finished">You have used all your moves.</string>
+    <string name="invalid_coords">Invalid coordinates</string>
+    <string name="people_and_houses_edge_only">You can only place people and houses on the edge</string>
+    <string name="house_person_too_close">The person and the house of the same color can\'t be less than 5 spaces apart</string>
+    <string name="houses_and_people_only_on_green_grass">You have to put people and houses on empty spaces with green grass.</string>
+    <string name="unexpected_problem">Unexpected problem</string>
+    <string name="person_has_no_path">The person can\'t move there because there isn\'t a path to get there.  Remember to only move your person one space at a time.</string>
+    <string name="person_on_edge_can_only_go_to_their_house">You can\'t move a person onto the edge unless they are going to their house.</string>
+    <string name="cant_discard_moving_person">You can\'t discard -- you started moving a person using your tile.</string>
+    <string name="cant_discard_house">You can\'t discard a house piece.</string>
+    <string name="cant_discard_person">You can\'t discard a person piece.</string>
 
 </resources>

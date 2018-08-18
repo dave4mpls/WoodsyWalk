@@ -74,7 +74,7 @@ import java.util.ArrayList;
 public class WoodsyActivity extends Activity implements
     View.OnClickListener {
 
-  public static final String TAG = "SkeletonActivity";
+  public static final String TAG = "WoodsyActivity";
 
   // Client used to sign in with Google APIs
   private GoogleSignInClient mGoogleSignInClient = null;
@@ -277,9 +277,12 @@ public class WoodsyActivity extends Activity implements
   }
 
   // Open the create-game UI. You will get back an onActivityResult
-  // and figure out what to do.
+  // and figure out what to do.  Notice that in the getSelectOpponentsIntent we
+  // can set the minimum & maximum # of players (it's one less-- the # of "additional" players)
+  // and for WoodsyWalk we will select from 1-4 players (or more if I increase the number of people tokens).
+  // So that means I can play woodsy walk solitaire!  (Good for testing, too.)
   public void onStartMatchClicked(View view) {
-    mTurnBasedMultiplayerClient.getSelectOpponentsIntent(1, 7, true)
+    mTurnBasedMultiplayerClient.getSelectOpponentsIntent(0, Pieces.numberOfPeople()-1, true)
         .addOnSuccessListener(new OnSuccessListener<Intent>() {
           @Override
           public void onSuccess(Intent intent) {
