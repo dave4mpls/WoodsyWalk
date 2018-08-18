@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Google Play game services IDs.
+Save this file as res/values/games-ids.xml in your project.
+-->
+<resources>
+    <!-- app_id -->
+    <string name="app_id" translatable="false">818457456262</string>
+    <!-- package_name -->
+    <string name="package_name" translatable="false">com.davewhitesoftware.woodsywalk</string>
+    <!-- achievement Got All Four Houses -->
+    <string name="achievement_got_all_four_houses" translatable="false">CgkIht32_ugXEAIQAg</string>
+</resources>

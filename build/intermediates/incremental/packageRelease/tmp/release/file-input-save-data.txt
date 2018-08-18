@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Fri Aug 17 22:27:05 CDT 2018
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\USER\\AndroidStudioProjects\\android-basic-samples\\WoodsyWalk\\build\\intermediates\\transforms\\dexMerger\\release\\0
+0.path=classes.dex
+0.set=DEX
+count=1

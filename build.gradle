@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyPassword 'Bn624los!!'
+            storeFile file('C:/Users/USER/prodAndroidKeyStore/prodAndroidKeyStore.jks')
+            storePassword 'Bn624los!!'
+            keyAlias 'DWSOFTWARE_PROD_KEY'
+        }
+    }
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.davewhitesoftware.woodsywalk"
+
+        minSdkVersion android_min_sdk_version
+        targetSdkVersion android_compile_version
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+/*            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
+*/
+            signingConfig signingConfigs.config
+        }
+    }
+}
+
+dependencies {
+    implementation "com.android.support:appcompat-v7:${appcompat_library_version}"
+    implementation "com.android.support:support-v4:${support_library_version}"
+    implementation "com.google.android.gms:play-services-games:${gms_library_version}"
+    implementation "com.google.android.gms:play-services-auth:${gms_library_version}"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
