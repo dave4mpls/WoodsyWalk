@@ -1,5 +1,7 @@
 package com.davewhitesoftware.woodsywalk;
 
+import android.graphics.Color;
+
 import java.util.Random;
 
 
@@ -11,7 +13,9 @@ import java.util.Random;
 //  Each piece is an 18-bit positive integer, with the following bitmapped meanings:
 //  Bits 17-15:     0 if no house figure is on this piece, or 1,2,3,4 for the color of the house
 //  Bits 14-12:     0 if no person figure is on this piece, or 1,2,3,4 for the color of the person
-//  Bits 11-6:      The piece number, 1 through the number of pieces (currently 36, can range up to 64).
+//  Bits 11-6:      The piece number, 1 through the number of pieces (currently 36, can range up to 63).
+//                  A piece that is all zeroes is blank.
+//                  A piece that has a piece number of 63 represents End of Turn in the game data's piece array.
 //  Bit 5:          Set if the piece has an upward line.
 //  Bit 4:          Set if the piece has a downward line.
 //  Bit 3:          Set if the piece has a leftward line.
@@ -63,6 +67,22 @@ public class PieceInfo {
     public static int pieceNumber(int p) { return ((p >> 6) & 0b111111); }
     public static int personNumber(int p) { return ((p >> 12) & 0b111); }
     public static int houseNumber(int p) { return ((p >> 15) & 0b111); }
+    public static boolean isHouse(int p) {      // true if the piece is JUST a house piece (all the rest zero)
+        return ((p & 0b000111111111111111) != 0);
+    }
+    public static boolean isPerson(int p) {     // true if the piece is JUST a person piece (all the rest zero)
+        return ((p & 0b111000111111111111) != 0);
+    }
+    public static boolean isTile(int p) {       // true if the piece is any other piece but a plain person or house piece
+        return ((!PieceInfo.isHouse(p)) && (!PieceInfo.isPerson(p)));
+    }
+    public static boolean isBlank(int p) { return (p==0); }
+    public static boolean isEndOfTurn(int p) { return (PieceInfo.pieceNumber(p)==63); }
+    public static int numberMoves(int p) {
+        // Returns the number of moves you can make of a person piece by discarding this piece.
+        return ((PieceInfo.up(p)? 1 : 0) + (PieceInfo.down(p)? 1: 0) + (PieceInfo.left(p)? 1: 0)
+            + (PieceInfo.right(p)? 1: 0));
+    }
 
     // Static method for creating a piece (which is of course actually an integer)
     public static int createPiece(boolean up, boolean down, boolean left, boolean right, boolean silver, boolean gold, int pieceNumber, int personNumber, int houseNumber) {
@@ -77,6 +97,19 @@ public class PieceInfo {
         p |= (personNumber << 12);
         p |= (houseNumber << 15);
         return p;
+    }
+
+    public static int createHousePiece(int h) {
+        return PieceInfo.createPiece(false,false,false,false,false,false,0,0,h);
+    }
+
+    public static int createPersonPiece(int p) {
+        return PieceInfo.createPiece(false,false,false,false,false,false,0,p,0);
+    }
+
+    public static int createBlankPiece() { return 0; }
+    public static int createEndOfTurnPiece() {
+        return PieceInfo.createPiece(false,false,false,false,false,false,63,0,0);
     }
 
     // Methods for modifying a piece

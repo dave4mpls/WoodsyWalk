@@ -58,7 +58,7 @@ public class WoodsyTurn {
     return st.getBytes(Charset.forName("UTF-8"));
   }
 
-  // Creates a new instance of SkeletonTurn.
+  // Creates a new instance of WoodsyTurn.
   static public WoodsyTurn unpersist(byte[] byteArray) {
 
     if (byteArray == null) {
