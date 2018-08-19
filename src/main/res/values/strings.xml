@@ -31,5 +31,9 @@
     <string name="cant_discard_moving_person">You can\'t discard -- you started moving a person using your tile.</string>
     <string name="cant_discard_house">You can\'t discard a house piece.</string>
     <string name="cant_discard_person">You can\'t discard a person piece.</string>
+    <string name="cant_play_path_piece_on_edge">You can\'t play a path piece on the edge of the board</string>
+    <string name="cant_move_there">You can\'t move there</string>
+    <string name="only_one_person_in_square_at_time">Only one person can be in a square at a time.</string>
+    <string name="turn_complete">Turn Complete</string>
 
 </resources>

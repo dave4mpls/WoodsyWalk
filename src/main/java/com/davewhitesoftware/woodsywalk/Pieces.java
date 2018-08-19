@@ -72,10 +72,10 @@ public class Pieces {
     public static int personNumber(int p) { return ((p >> 12) & 0b111); }
     public static int houseNumber(int p) { return ((p >> 15) & 0b111); }
     public static boolean isHouse(int p) {      // true if the piece is JUST a house piece (all the rest zero)
-        return ((p & 0b000111111111111111) == 0);
+        return ((p & 0b000111111111111111) == 0) && Pieces.houseNumber(p) > 0;
     }
     public static boolean isPerson(int p) {     // true if the piece is JUST a person piece (all the rest zero)
-        return ((p & 0b111000111111111111) == 0);
+        return ((p & 0b111000111111111111) == 0) && Pieces.personNumber(p) > 0;
     }
     public static boolean isPersonAndHouse(int p) {     // true if the piece is a person AND house
         return ((p & 0b000000111111111111) == 0);

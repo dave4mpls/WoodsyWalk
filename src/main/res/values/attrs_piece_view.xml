@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="PieceView">
+        <attr name="piece" format="integer" />
+    </declare-styleable>
+</resources>

@@ -10,12 +10,11 @@ package com.davewhitesoftware.woodsywalk;
 
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import com.davewhitesoftware.woodsywalk.R;
 
 public class WoodsyGameData implements Serializable {
     static final long serialVersionUID = 1L;
@@ -135,7 +134,7 @@ public class WoodsyGameData implements Serializable {
         this.beginTurn(this.currentParticipant, this.currentContext);
     }
 
-    public boolean piecesLeft() {
+    public boolean piecesLeftThisTurn() {
         // returns whether there are pieces left to play this turn.
         if (this.currentTurnPieces.size() == 0) this.turnFinished = true;
         if (this.turnFinished) return false;
@@ -145,7 +144,8 @@ public class WoodsyGameData implements Serializable {
     public int getNextPiece() {
         // during a turn, this returns the next piece to play, which can be displayed
         // in the next piece area.  Returns the End of Turn piece if none remain.
-        if (!this.piecesLeft()) return Pieces.createEndOfTurnPiece();
+        if (this.movingPerson) return Pieces.getPersonPieceFrom(this.currentBoard.getCell(this.personCoordinates));
+        if (!this.piecesLeftThisTurn()) return Pieces.createEndOfTurnPiece();
         return this.currentTurnPieces.get(0);
     }
 
@@ -186,7 +186,7 @@ public class WoodsyGameData implements Serializable {
         Coordinates c = new Coordinates(x,y);
         // check if there are no moves left
         if (this.movingPerson && this.personMovesLeft <= 0) return this.setFailure(getString(R.string.all_moves_finished));
-        if (!this.piecesLeft()) return this.setFailure(getString(R.string.turn_finished));
+        if (!this.piecesLeftThisTurn()) return this.setFailure(getString(R.string.turn_finished));
         // check for valid coordinates, retrieve the current piece on the board.
         if (!this.currentBoard.isValidCoords(c)) return this.setFailure(getString(R.string.invalid_coords));
         int currentPiece = this.currentBoard.getCell(c);
@@ -199,6 +199,8 @@ public class WoodsyGameData implements Serializable {
             int thisPersonNumber = Pieces.personNumber(thisPersonPiece);
             int goalPiece = this.currentBoard.createGoalPiece(thisPersonNumber,0,c);
             boolean reachedGoal = (goalPiece == currentPiece);
+            if (Pieces.personNumber(currentPiece) > 0)
+                return this.setFailure(getString(R.string.only_one_person_in_square_at_time));
             if (!Pieces.piecesConnect(this.currentBoard.getCell(this.personCoordinates), currentPiece, this.personCoordinates.x(), this.personCoordinates.y(), x, y))
                 return this.setFailure(getString(R.string.person_has_no_path));
             if (this.currentBoard.isOnEdge(c) && !reachedGoal)
@@ -232,7 +234,7 @@ public class WoodsyGameData implements Serializable {
             // Playing a person piece or house piece when you're not moving a person.
             if (!this.currentBoard.isOnEdge(c)) return this.setFailure(getString(R.string.people_and_houses_edge_only));  // person piece has to be placed on edge
             if (this.currentBoard.distanceToPartner(p, c) < 5) return this.setFailure(getString(R.string.house_person_too_close));  // person piece can't be too close to house piece
-            if (!Pieces.isGreenGrassPiece(currentPiece) return this.setFailure(getString(R.string.houses_and_people_only_on_green_grass));  // have to put house or person on green grass.
+            if (!Pieces.isGreenGrassPiece(currentPiece)) return this.setFailure(getString(R.string.houses_and_people_only_on_green_grass));  // have to put house or person on green grass.
             // combine the pieces and store the result
             int newPiece = Pieces.combinePieces(currentPiece, p);
             if (Pieces.isFailurePiece(newPiece)) return this.setFailure(getString(R.string.unexpected_problem));
@@ -243,8 +245,26 @@ public class WoodsyGameData implements Serializable {
             // Playing a regular piece.  If you play it against an existing piece with a person on it,
             // it starts person-moving mode.  If you play it on a blank square, it places the piece.
             // Other moves are invalid.
-
+            if (this.currentBoard.isOnEdge(c))
+                return this.setFailure(getString(R.string.cant_play_path_piece_on_edge));
+            if (Pieces.personNumber(currentPiece) > 0) {
+                // Begin person moving mode
+                this.movingPerson = true;
+                this.personCoordinates = c;
+                this.personMovesLeft = Pieces.numberMoves(currentPiece);
+                this.setCurrentPiecePlayed();
+                return Pieces.createSuccessPiece();
+            }
+            else if (Pieces.isBlank(currentPiece)) {
+                // Placing tile in blank space
+                this.currentBoard.setCell(c, p);
+                this.setCurrentPiecePlayed();
+                return Pieces.createSuccessPiece();
+            }
+            else
+                return this.setFailure(getString(R.string.cant_move_there));
         }
+        // Shouldn't get here, and indeed, the compiler says you can't get here.
     }
 
     public int playPieceDiscard(int p) {
@@ -254,7 +274,8 @@ public class WoodsyGameData implements Serializable {
         if (this.movingPerson) return this.setFailure(getString(R.string.cant_discard_moving_person));
         if (Pieces.isHouse(p)) return this.setFailure(getString(R.string.cant_discard_house));
         if (Pieces.isPerson(p)) return this.setFailure(getString(R.string.cant_discard_person));
-        
+        this.setCurrentPiecePlayed();  // put the piece in the played pile
+        return Pieces.createSuccessPiece();
     }
 
     public boolean movingPerson() {
@@ -267,6 +288,11 @@ public class WoodsyGameData implements Serializable {
         return this.personMovesLeft;
     }
 
+    public int piecesLeftInBag() {
+        // For display purposes, you might want to know how many pieces are left in the whole bag.
+        return this.piecesToPlay.get(this.currentParticipant).size();
+    }
+
     public WoodsyBoardData getCurrentBoard() {
         // retrieve the current board, which is the one that has any modifications during the turn.
         return this.currentBoard;
@@ -275,9 +301,40 @@ public class WoodsyGameData implements Serializable {
     public void endTurn() {
         // call this when the turn is complete, right before serializing the data.
         // it saves the proposed turn into the actual current participant's board.
-        int cindx = this.getIndex(this.currentParticipant);
-        if (cindx < 0) return;
-        this.boards[cindx].copyFrom()
+        // it also removes all the played pieces permanently from where they came from.
+        if (this.movingPerson) this.setCurrentPiecePlayed();  // if we were moving a person, we didn't actually put the piece in the played pile till now.
+        for (int thisPlayedPiece : this.currentTurnPlayedPieces) {
+            if (Pieces.isPerson(thisPlayedPiece))
+                this.remainingPersons.remove(Integer.valueOf(Pieces.personNumber(thisPlayedPiece)));
+            else if (Pieces.isHouse(thisPlayedPiece))
+                this.remainingHouses.remove(Integer.valueOf(Pieces.houseNumber(thisPlayedPiece)));
+            else
+                this.piecesToPlay.get(this.currentParticipant).remove(Integer.valueOf(thisPlayedPiece));
+        }
+        //--  check if there is now a new minimum number of pieces
+        if (this.piecesLeftInBag() < this.minPiecesLeft) this.minPiecesLeft = this.piecesLeftInBag();
+        //--  now check to see if anybody has pieces left!
+        int participantsWithPieces = 0;
+        for (String thisParticipantId : this.participantIds) {
+            if (this.piecesToPlay.get(thisParticipantId).size() > 0) participantsWithPieces++;
+        }
+        if (participantsWithPieces == 0) {
+            // nobody has pieces-- game is over!  find and declare the winner.
+            int maxScore = 0; ArrayList<String> playersWithMaxScore = new ArrayList<String>();
+            playersWithMaxScore.clear();
+            for (String thisParticipantId : this.participantIds) {
+                if (this.scores.get(thisParticipantId) == maxScore)
+                    playersWithMaxScore.add(thisParticipantId);
+                if (this.scores.get(thisParticipantId) > maxScore) {
+                    maxScore = this.scores.get(thisParticipantId);
+                    playersWithMaxScore.clear();
+                    playersWithMaxScore.add(thisParticipantId);
+                }
+            }
+            this.winner = TextUtils.join(", ", playersWithMaxScore);
+        }
+        //--- now that we've removed played pieces, save the board.
+        this.boards.get(this.currentParticipant).copyFrom(this.currentBoard);
     }
 
     public String getWinner() {
@@ -285,4 +342,8 @@ public class WoodsyGameData implements Serializable {
         return this.winner;
     }
 
+    public boolean gameOver() {
+        // returns true if the game is over (determined by whether a winner has been set)
+        return (this.winner.length() == 0);
+    }
 }
