@@ -13,13 +13,15 @@ import android.view.View;
 /**
  * PieceView: a display representation of a WoodsyWalk piece.
  */
-public class PieceView extends View {
+public class PieceView extends View implements View.OnClickListener {
     private Context ctx;
     private int mPiece;      // The piece integer with its bitmap is all we need to know to draw a piece.
+    private int mRow, mCol;   // used by callers when this piece is part of a table
+    private OnClickListener clickListener;
 
     private TextPaint mTextPaint;
     private Paint mLightGreenPaint, mDarkGreenPaint, mYellowPaint, mRedPaint, mPurplePaint, mBluePaint;
-    private Paint mBrownPaint, mGoldPaint, mSilverPaint, mBlackPaint, mEdgeGreenPaint, mWhitePaint;
+    private Paint mBrownPaint, mGoldPaint, mSilverPaint, mBlackPaint, mEdgeGreenPaint;
     private float mTextWidth;
     private float mTextHeight;
     private Paint[] personHousePaints;
@@ -60,6 +62,14 @@ public class PieceView extends View {
 
         a.recycle();
 
+        // Default row and col are zero; these are convenience properties for the parent controls,
+        // so they are just referenced using setters and getters
+        mRow = 0; mCol = 0;
+
+        // clear the click listener on open; set up a link to our onClick listener
+        this.clickListener = null;
+        super.setOnClickListener(this);
+
         // Set up a default TextPaint object
         mTextPaint = new TextPaint();
         mTextPaint.setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -68,7 +78,7 @@ public class PieceView extends View {
         // Set up color paint objects for painting parts of pieces.
         mLightGreenPaint = new Paint(); mEdgeGreenPaint = new Paint(); mDarkGreenPaint = new Paint();
         mBlackPaint = new Paint(); mBrownPaint = new Paint(); mGoldPaint = new Paint();
-        mSilverPaint = new Paint(); mWhitePaint = new Paint(); mRedPaint = new Paint();
+        mSilverPaint = new Paint(); mRedPaint = new Paint();
         mBluePaint = new Paint(); mPurplePaint = new Paint(); mYellowPaint = new Paint();
         this.preparePaint(this.mEdgeGreenPaint, Color.argb(255,164,255,164), 2);
         this.preparePaint(this.mDarkGreenPaint, Color.argb(255, 0,193,0), 2);
@@ -77,7 +87,6 @@ public class PieceView extends View {
         this.preparePaint(this.mBrownPaint, Color.argb(255,184,134,1),this.getWidth() * .1);
         this.preparePaint(this.mGoldPaint, Color.argb(255,255,234,118),2);
         this.preparePaint(this.mSilverPaint, Color.argb(255,189,189,189),2);
-        this.preparePaint(this.mWhitePaint, Color.WHITE, 2);
         int personLineWidth = 15;    // default -- will be changed by person drawing routine anyway
         this.preparePaint(this.mRedPaint, Color.RED, personLineWidth);
         this.preparePaint(this.mBluePaint, Color.BLUE, personLineWidth);
@@ -127,7 +136,7 @@ public class PieceView extends View {
     private void drawPerson(Canvas canvas, Paint paint, int centerX, int topY, int width, int height) {
         // Draws a person figure for the piece.
         Path personPath = new Path();
-        float lineWidth = (float)(this.getWidth()*0.12);
+        float lineWidth = (float)(width*0.12);
         topY += lineWidth/2 + 1;
         height -= lineWidth + 2;
         width -= lineWidth;
@@ -178,8 +187,8 @@ public class PieceView extends View {
         Paint gold = this.mGoldPaint;
         silver.setStyle(Paint.Style.FILL);
         gold.setStyle(Paint.Style.FILL);
-        if (Pieces.silver(p)) canvas.drawCircle((x1+cx)/2,(y1+cy)/2,Math.abs(cy-y1)/2,silver);
-        if (Pieces.gold(p)) canvas.drawCircle((x2+cx)/2,(y2+cy)/2,Math.abs(y2-cy)/2, gold);
+        if (Pieces.silver(p)) canvas.drawCircle((x1+cx)/2,(y1+cy)/2,(Math.abs(cy-y1)/2)*0.65f,silver);
+        if (Pieces.gold(p)) canvas.drawCircle((x2+cx)/2,(y2+cy)/2,(Math.abs(y2-cy)/2)*0.65f, gold);
     }
 
     public void setPiece(int p) {
@@ -191,6 +200,25 @@ public class PieceView extends View {
 
     public int getPiece() {
         return this.mPiece;
+    }
+
+    //-- The parent can set rows and columns on a piece to make it easier to know
+    //-- which piece in a table was clicked.
+    public void setRow(int r) { mRow = r; }
+    public void setCol(int c) { mCol = c; }
+    public int getRow() { return mRow; }
+    public int getCol() { return mCol; }
+
+    @Override
+    public void onClick(View v) {
+        //-- this passes click events to the listener that the parent/owner set
+        if (clickListener != null) clickListener.onClick(v);
+    }
+
+    @Override
+    public void setOnClickListener(OnClickListener listener) {
+        //-- you call this to set what happens when a piece gets clicked
+        this.clickListener = listener;
     }
 
     @Override
@@ -214,7 +242,7 @@ public class PieceView extends View {
         boolean pieceIsBlank = Pieces.isBlank(this.mPiece);
         boolean pieceIsGreenGrass = Pieces.isGreenGrassPiece(this.mPiece);
         if (pieceIsPerson || pieceIsHouse)
-            bgFill = this.mWhitePaint;
+            bgFill = this.mDarkGreenPaint;
         else if (pieceIsBlank)
             bgFill = this.mLightGreenPaint;
         else if (pieceIsGreenGrass)
@@ -228,9 +256,28 @@ public class PieceView extends View {
         canvas.drawRect(paddingLeft,paddingTop,paddingLeft+contentWidth,paddingTop+contentHeight,this.mBlackPaint);
         // Now, draw the roads.  And the coins on the roads.
         this.drawRoadsAndCoins(canvas, this.mPiece, paddingLeft+2,paddingTop+2,paddingLeft+contentWidth-2,paddingTop+contentHeight-2);
+        // Now, if there is a person or house on this piece, draw it.  If this is JUST a person or house
+        // piece, draw it centered.  Make sure to draw it the right color.
+        Paint phPaint;
+        if (Pieces.isPerson(this.mPiece)) {
+            phPaint = this.personHousePaints[Pieces.personNumber(this.mPiece)-1];
+            this.drawPerson(canvas,phPaint,paddingLeft+contentWidth/2,2+paddingTop,((int)(contentWidth*0.4)),contentHeight-4);
+        }
+        else if (Pieces.isHouse(this.mPiece)) {
+            phPaint = this.personHousePaints[Pieces.houseNumber(this.mPiece)-1];
+            this.drawHouse(canvas,phPaint,paddingLeft+contentWidth/2,2+paddingTop,((int)(contentWidth*0.4)),contentHeight-4);
+        }
+        else {
+            if (Pieces.personNumber(this.mPiece) > 0) {
+                phPaint = this.personHousePaints[Pieces.personNumber(this.mPiece)-1];
+                this.drawPerson(canvas,phPaint,paddingLeft+contentWidth/4,2+paddingTop,((int)(contentWidth*0.4)),contentHeight-4);
+            }
+            if (Pieces.houseNumber(this.mPiece) > 0) {
+                phPaint = this.personHousePaints[Pieces.houseNumber(this.mPiece)-1];
+                this.drawHouse(canvas,phPaint,paddingLeft+(contentWidth*3)/4,2+paddingTop,((int)(contentWidth*0.4)),contentHeight-4);
+            }
+        }
 
-        //  Now, since we're not finished yet, add a purple house.
-        //this.drawHouse(canvas,this.mRedPaint,paddingLeft+contentWidth/2,2+paddingTop,((int)(contentWidth*0.8)),contentHeight-4);
 
 /*
         // Draw the text.

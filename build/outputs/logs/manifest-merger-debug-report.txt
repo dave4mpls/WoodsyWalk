@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
 MERGED from [com.android.support:appcompat-v7:27.0.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.0.2.aar\166b102923a609dd3ea049fbb02ec243\AndroidManifest.xml:17:1-22:12
 MERGED from [com.google.android.gms:play-services-games:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-games-11.6.2.aar\0c6455a094afb0a4adb4353f87450bc2\AndroidManifest.xml:16:1-19:12
 MERGED from [com.google.android.gms:play-services-auth:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-auth-11.6.2.aar\26804e83ed10f58f2c16ac1b802e94b7\AndroidManifest.xml:16:1-26:12
@@ -29,25 +29,25 @@ MERGED from [com.google.android.gms:play-services-drive-license:11.6.2] C:\Users
 MERGED from [com.google.android.gms:play-services-tasks-license:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.6.2.aar\26a90fa2449827df984d9e06c8eed921\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-auth-api-phone-license:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-auth-api-phone-license-11.6.2.aar\d3f237ee5c4afda4085f8c291fb65eb2\AndroidManifest.xml:2:1-6:12
 MERGED from [com.google.android.gms:play-services-auth-base-license:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-auth-base-license-11.6.2.aar\13c0a99500fa301af4a7528e8415e80b\AndroidManifest.xml:2:1-6:12
-INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
-INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
+INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
 	package
 		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:3:5-47
 		INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-30:12
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:5:5-28:19
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:7:5-30:19
 MERGED from [com.google.android.gms:play-services-games:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-games-11.6.2.aar\0c6455a094afb0a4adb4353f87450bc2\AndroidManifest.xml:18:5-19
 MERGED from [com.google.android.gms:play-services-games:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-games-11.6.2.aar\0c6455a094afb0a4adb4353f87450bc2\AndroidManifest.xml:18:5-19
 MERGED from [com.google.android.gms:play-services-auth:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-auth-11.6.2.aar\26804e83ed10f58f2c16ac1b802e94b7\AndroidManifest.xml:19:5-25:19
@@ -74,50 +74,46 @@ MERGED from [com.google.android.gms:play-services-auth-api-phone-license:11.6.2]
 MERGED from [com.google.android.gms:play-services-auth-api-phone-license:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-auth-api-phone-license-11.6.2.aar\d3f237ee5c4afda4085f8c291fb65eb2\AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-auth-base-license:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-auth-base-license-11.6.2.aar\13c0a99500fa301af4a7528e8415e80b\AndroidManifest.xml:5:5-20
 MERGED from [com.google.android.gms:play-services-auth-base-license:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-auth-base-license-11.6.2.aar\13c0a99500fa301af4a7528e8415e80b\AndroidManifest.xml:5:5-20
-	android:screenOrientation
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:10:9-46
 	android:label
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:9:9-41
-	android:fullBackupContent
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:7:9-42
-	android:icon
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:8:9-45
-	android:allowBackup
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:6:9-35
-	android:theme
 		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:11:9-41
+	android:fullBackupContent
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:9:9-42
+	android:icon
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:10:9-45
+	android:allowBackup
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:8:9-35
+	android:theme
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:12:9-41
 meta-data#com.google.android.gms.games.APP_ID
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:12:10-14:46
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:13:10-15:46
 	android:value
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:14:13-43
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:15:13-43
 	android:name
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:13:13-63
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:14:13-63
 meta-data#com.google.android.gms.version
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:16:11-17:71
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:17:11-18:71
 MERGED from [com.google.android.gms:play-services-basement:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.6.2.aar\90a1fb6932caf9580942bb0e21889945\AndroidManifest.xml:20:9-121
 MERGED from [com.google.android.gms:play-services-basement:11.6.2] C:\Users\USER\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.6.2.aar\90a1fb6932caf9580942bb0e21889945\AndroidManifest.xml:20:9-121
 	android:value
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:17:15-68
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:18:15-68
 	android:name
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:16:22-67
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:17:22-67
 activity#com.davewhitesoftware.woodsywalk.WoodsyActivity
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:19:10-27:20
-	android:screenOrientation
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:21:13-50
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:22:10-29:20
 	android:label
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:22:13-45
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:24:13-45
 	android:name
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:20:13-75
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:23:13-75
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:23:13-26:29
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:25:13-28:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:24:17-69
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:26:17-69
 	android:name
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:24:25-66
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:26:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:25:17-77
+ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:25:27-74
+		ADDED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml:27:27-74
 uses-sdk
 INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\USER\AndroidStudioProjects\android-basic-samples\WoodsyWalk\src\main\AndroidManifest.xml

@@ -72,7 +72,7 @@ import java.util.ArrayList;
  * @author Wolff (wolff@google.com), 2013
  */
 public class WoodsyActivity extends Activity implements
-    View.OnClickListener {
+    View.OnClickListener, WoodsyBoardView.OnBoardCellClickedListener {
 
   public static final String TAG = "WoodsyActivity";
 
@@ -119,6 +119,8 @@ public class WoodsyActivity extends Activity implements
     // Setup signin and signout buttons
     findViewById(R.id.sign_out_button).setOnClickListener(this);
     findViewById(R.id.sign_in_button).setOnClickListener(this);
+    // Setup test board click example (DEBUGGING)
+    ((WoodsyBoardView)findViewById(R.id.demo_board)).setOnBoardCellClickedListener(this);
 
     mDataView = findViewById(R.id.data_view);
     mTurnTextView = findViewById(R.id.turn_counter_view);
@@ -170,15 +172,16 @@ public class WoodsyActivity extends Activity implements
   protected void onPause() {
     super.onPause();
 
+    // THE FOLLOWING IS NO LONGER REQUIRED BECAUSE WE ARE USING DEFAULT INVITATION AND MATCH UPDATE CALLBACKS.
     // Unregister the invitation callbacks; they will be re-registered via
     // onResume->signInSilently->onConnected.
-    if (mInvitationsClient != null) {
-      mInvitationsClient.unregisterInvitationCallback(mInvitationCallback);
-    }
+    //if (mInvitationsClient != null) {
+    //  mInvitationsClient.unregisterInvitationCallback(mInvitationCallback);
+    //}
 
-    if (mTurnBasedMultiplayerClient != null) {
-      mTurnBasedMultiplayerClient.unregisterTurnBasedMatchUpdateCallback(mMatchUpdateCallback);
-    }
+    //if (mTurnBasedMultiplayerClient != null) {
+    //  mTurnBasedMultiplayerClient.unregisterTurnBasedMatchUpdateCallback(mMatchUpdateCallback);
+    //}
   }
 
   private String mDisplayName;
@@ -227,18 +230,18 @@ public class WoodsyActivity extends Activity implements
 
     setViewVisibility();
 
-    // As a demonstration, we are registering this activity as a handler for
-    // invitation and match events.
+    // As a demonstration, the example game this was based on registered this activity as a handler for
+    // invitation and match events.  The final WoodsyActivity will use standard notifications.
 
     // This is *NOT* required; if you do not register a handler for
     // invitation events, you will get standard notifications instead.
     // Standard notifications may be preferable behavior in many cases.
-    mInvitationsClient.registerInvitationCallback(mInvitationCallback);
+    //mInvitationsClient.registerInvitationCallback(mInvitationCallback);
 
     // Likewise, we are registering the optional MatchUpdateListener, which
     // will replace notifications you would get otherwise. You do *NOT* have
     // to register a MatchUpdateListener.
-    mTurnBasedMultiplayerClient.registerTurnBasedMatchUpdateCallback(mMatchUpdateCallback);
+    //mTurnBasedMultiplayerClient.registerTurnBasedMatchUpdateCallback(mMatchUpdateCallback);
   }
 
   private void onDisconnected() {
@@ -853,6 +856,10 @@ public class WoodsyActivity extends Activity implements
     setViewVisibility();
   }
 
+  /*
+  THESE ARE NO LONGER USED.  They show how to create your own invitation callbacks, so I'm keeping
+  the commented out code, but the game users the default invitation and match update features now.
+
   private InvitationCallback mInvitationCallback = new InvitationCallback() {
     // Handle notification events.
     @Override
@@ -882,6 +889,7 @@ public class WoodsyActivity extends Activity implements
       Toast.makeText(WoodsyActivity.this, "A match was removed.", Toast.LENGTH_SHORT).show();
     }
   };
+  */
 
   public void showErrorMessage(int stringId) {
     showWarning("Warning", getResources().getString(stringId));
@@ -935,4 +943,12 @@ public class WoodsyActivity extends Activity implements
         break;
     }
   }
+
+    @Override
+    public void onBoardCellClicked(WoodsyBoardView w, int col, int row) {
+        //-- This handles clicks on the game board.
+        Toast.makeText(
+                WoodsyActivity.this,
+                "You clicked on the cell (" + col + ", " + row + ").", Toast.LENGTH_SHORT).show();
+    }
 }

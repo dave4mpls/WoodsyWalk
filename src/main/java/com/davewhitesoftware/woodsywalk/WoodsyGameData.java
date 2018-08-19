@@ -98,6 +98,7 @@ public class WoodsyGameData implements Serializable {
     public void beginTurn(String participantId, Context contextSource) {
         // Begin the current turn by copying the current player's board to the current board property.
         // When you begin a turn, you also link the game data to an Android context that can get string resources.
+        this.addParticipantIfNeeded(participantId);
         this.currentParticipant = participantId;
         this.currentBoard.copyFrom(this.getBoard(participantId));
         this.currentContext = contextSource;

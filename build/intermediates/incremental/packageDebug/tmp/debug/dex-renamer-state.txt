@@ -1,4 +1,7 @@
-#Sat Aug 18 23:15:18 CDT 2018
-base.0=C\:\\Users\\USER\\AndroidStudioProjects\\android-basic-samples\\WoodsyWalk\\build\\intermediates\\transforms\\dexMerger\\debug\\30
+#Sun Aug 19 10:57:46 CDT 2018
+base.0=C\:\\Users\\USER\\AndroidStudioProjects\\android-basic-samples\\WoodsyWalk\\build\\intermediates\\transforms\\dexMerger\\debug\\102
+path.1=classes.dex
+renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
+base.1=C\:\\Users\\USER\\AndroidStudioProjects\\android-basic-samples\\WoodsyWalk\\build\\intermediates\\transforms\\dexMerger\\debug\\103

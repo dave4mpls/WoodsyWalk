@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="WoodsyBoardView">
         <attr name="testMode" format="boolean" />
+        <attr name="readOnlyMode" format="boolean" />
     </declare-styleable>
 </resources>

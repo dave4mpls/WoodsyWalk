@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.davewhitesoftware.woodsywalk"
-    android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionCode="2"
+    android:versionName="0.1" >
 
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="26" />
 
+    <!-- Removed fixed orientation that looks like this: android:screenOrientation="landscape" -->
+    <!-- It was in the line after android:label -->
     <application
         android:allowBackup="true"
         android:debuggable="true"
         android:fullBackupContent="false"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:screenOrientation="landscape"
+        android:testOnly="true"
         android:theme="@style/Theme.App" >
         <meta-data
             android:name="com.google.android.gms.games.APP_ID"
@@ -23,10 +25,11 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <!-- Removed fixed orientation that looks like this: android:screenOrientation="landscape" -->
+        <!-- It was in the line after android:name -->
         <activity
             android:name="com.davewhitesoftware.woodsywalk.WoodsyActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
